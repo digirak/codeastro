@@ -153,36 +153,49 @@
 <span class="target" id="module-correlate"></span><p>Functions to perform correlations</p>
 <dl class="py function">
 <dt id="correlate.cross_corr">
-<code class="sig-prename descclassname">correlate.</code><code class="sig-name descname">cross_corr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#correlate.cross_corr" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">correlate.</code><code class="sig-name descname">cross_corr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/correlate.html#cross_corr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#correlate.cross_corr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cross-correlation</p>
 <p>Calculate the cross correlation of array b against array a.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><dl class="simple">
-<dt>a (array): numpy vector. Reference against which cross</dt><dd><p>correlation is calculated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>array</em>) – numpy vector. Reference against which cross
+correlation is calculated.</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – numpy vector. The resulting cross-correlation function
+will show how b should be shifted to line up with vector a.</p></li>
+</ul>
 </dd>
-<dt>b (array): numpy vector. The resulting cross-correlation function</dt><dd><p>will show how b should be shifted to line up with vector a.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cross-correlation function</p>
 </dd>
-</dl>
-</dd>
-<dt>Returns:</dt><dd><p>array: cross-correlation function</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="correlate.find_shift">
-<code class="sig-prename descclassname">correlate.</code><code class="sig-name descname">find_shift</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#correlate.find_shift" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">correlate.</code><code class="sig-name descname">find_shift</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/correlate.html#find_shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#correlate.find_shift" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find offset between a and b.</p>
 <p>Find the offset between vector a and b that makes them line up as
 well as possible.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>a (array): Reference vector
-b (array): Target vector</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>array</em>) – Reference vector</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – Target vector</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><dl class="simple">
-<dt>float: the shift needed to be applied to vector b to</dt><dd><p>best match vector a</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the shift needed to be applied to vector b to</dt><dd><p>best match vector a</p>
 </dd>
 </dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>

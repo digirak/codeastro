@@ -3,14 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+
 Welcome to Trialdocs's documentation!
 =====================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-    correlation
-
+    intro
+    Methods
+.. include:: intro.rst
+.. include:: Methods.rst
 
 Indices and tables
 ==================

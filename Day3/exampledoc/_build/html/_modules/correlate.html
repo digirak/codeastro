@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>correlate &mdash; Trialdocs 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Trialdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Methods.html">Methods</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Trialdocs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>correlate</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for correlate</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Functions to perform correlations&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+
+<div class="viewcode-block" id="cross_corr"><a class="viewcode-back" href="../correlate.html#correlate.cross_corr">[docs]</a><span class="k">def</span> <span class="nf">cross_corr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cross-correlation</span>
+
+<span class="sd">    Calculate the cross correlation of array b against array a.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a (array): numpy vector. Reference against which cross</span>
+<span class="sd">            correlation is calculated.</span>
+<span class="sd">        b (array): numpy vector. The resulting cross-correlation function</span>
+<span class="sd">            will show how b should be shifted to line up with vector a.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        array: cross-correlation function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># noramlize a &amp; b</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+
+    <span class="c1"># compute the Fast Fourrier Transform</span>
+    <span class="n">f_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">f_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+    <span class="c1"># get the complex conjugate</span>
+    <span class="n">f_a_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">f_a</span><span class="p">)</span>
+
+    <span class="c1"># Convolution Theorem: The Fourier transform of the convolution is</span>
+    <span class="c1"># the product of the two Fourier transforms</span>
+
+    <span class="c1"># Correlation theorem: multiplying the Fourier transform of</span>
+    <span class="c1"># one function by the complex conjugate of the Fourier transform of</span>
+    <span class="c1"># the other gives the Fourier transform of their correlation</span>
+    <span class="c1"># The inverse then brings us back to the original domain</span>
+    <span class="n">c_corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">f_a_c</span><span class="o">*</span><span class="n">f_b</span><span class="p">)</span>
+
+    <span class="c1"># FFT cross corr method gives the cyclic cross-correlation</span>
+    <span class="c1"># &quot;first n points in c_corr[0..2*n] stored in wrap-around order,</span>
+    <span class="c1"># i.e., correlations at increasingly negative lags are in c_corr[n]</span>
+    <span class="c1"># on down to c_corr[n/2+1], while correlations at increasingly</span>
+    <span class="c1"># positive lags are in c_corr[0] (zero lag) on up to c_corr[n/2].&quot;</span>
+    <span class="c1"># --&gt; Numerical Recipes in C to get the linear correlation, need to</span>
+    <span class="c1"># circularly rotate the data this puts the peaks of the signal</span>
+    <span class="c1"># together</span>
+    <span class="n">c_corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">c_corr</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">c_corr</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="c1"># above does the same as np.fft.fftshift</span>
+    <span class="c1"># note that the shift occurs on a pixel/array element level,</span>
+    <span class="c1"># so len/2 has to be an integer so enforce floor/int division here</span>
+
+    <span class="c1"># normalizing, may help peak fitting</span>
+    <span class="n">c_corr</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_corr</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">c_corr</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">c_corr</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">c_corr</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">c_corr</span></div>
+
+
+<div class="viewcode-block" id="find_shift"><a class="viewcode-back" href="../correlate.html#correlate.find_shift">[docs]</a><span class="k">def</span> <span class="nf">find_shift</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find offset between a and b.</span>
+
+<span class="sd">    Find the offset between vector a and b that makes them line up as</span>
+<span class="sd">    well as possible.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a (array): Reference vector</span>
+<span class="sd">        b (array): Target vector</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: the shift needed to be applied to vector b to</span>
+<span class="sd">            best match vector a</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">npt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">c_corr</span> <span class="o">=</span> <span class="n">cross_corr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="c1"># define the lag grid that corresponds to the cross-correlation</span>
+    <span class="n">lag_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">npt</span><span class="p">)</span> <span class="o">-</span> <span class="n">npt</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="c1"># multiply by the pixel width to put in same units as the</span>
+    <span class="c1"># original function</span>
+    <span class="n">x_lag</span> <span class="o">=</span> <span class="n">lag_grid</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># the peak or center of the cross-correlation gives us the shift</span>
+    <span class="c1"># between the arrays fit 2nd order poly to peak of cross-corr</span>
+    <span class="n">ind_c_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">c_corr</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">c_corr</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ind_c_max</span> <span class="o">=</span> <span class="n">ind_c_max</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_lag</span><span class="p">[</span><span class="n">ind_c_max</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="n">ind_c_max</span><span class="o">+</span><span class="mi">2</span><span class="p">],</span>
+                        <span class="n">c_corr</span><span class="p">[</span><span class="n">ind_c_max</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="n">ind_c_max</span><span class="o">+</span><span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># differentiate and set to zero to find peak</span>
+    <span class="n">shift_y2</span> <span class="o">=</span> <span class="o">-</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">shift_y2</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># generate x-axis grid</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">-</span><span class="mf">50.23</span><span class="p">)</span><span class="o">*</span><span class="mf">3.67</span>
+
+    <span class="c1"># generate Gaussian profile for that grid</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">17.3</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+
+    <span class="c1"># do the cross-correlation</span>
+    <span class="n">shift</span> <span class="o">=</span> <span class="n">find_shift</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shift array b by </span><span class="si">{:.0f}</span><span class="s2"> pixels to line up with array a.&quot;</span> \
+          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">shift</span><span class="p">))</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Rakesh
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
