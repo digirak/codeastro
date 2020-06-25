@@ -6,7 +6,7 @@ $ pip install sphinx
 ```
 
 2. Since we will be using the Napoleon style of docstrings we need to install the `sphinx-napoleon` package as well (https://sphinxcontrib-napoleon.readthedocs.io/en/latest/). Lets also install the ReadTheDocs theme so that our documentation page looks nice when created.
-```
+
 $ pip install sphinxcontrib-napoleon sphinx-rtd-theme
 ```
 
@@ -58,7 +58,7 @@ Correlate
 
 .. automodule:: correlate
    :members:
-```
+   
 This will automatically parse `correlate.py` and look for your docstrings in order to turn them into a nicely-formatted web page.
 
 10. Run `make html` again to update the docs.
